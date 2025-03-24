@@ -1,15 +1,19 @@
-const express = require("express")//i required express here
 
-const aiRoutes = require("./routes/ai.routes");
+const express = require('express');
+const aiRoutes = require('./routes/ai.routes')
+const cors = require('cors')
 
-const app = express(); // store in variable "app"
+const app = express()
+
+app.use(cors())
+
 
 app.use(express.json())
 
-app.get('/', (req, res)=>{
-    res.send("hello world");// sending for server.js
+app.get('/', (req, res) => {
+    res.send('Hello World')
 })
 
-app.use("/ai",aiRoutes);
+app.use('/ai', aiRoutes)
 
-module.exports = app;//exporting app
+module.exports = app
