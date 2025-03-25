@@ -1,14 +1,28 @@
-require('dotenv').config();//i required my gemini key here 
-// import { path } from './src/app';
-const app = require('./src/app'); //i required my app from app.js
+import dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import app from './src/app.js';
 
-// const _dirname = path.resolve();
+// Load environment variables
+dotenv.config();
 
-// app.use(express.static(path.join(_dirname,"/Frontend/dist")));
-// app.get("*",(_, res)=>{
-//     res.sendFile(path.resolve(_dirname,"Frontend","dist","index.html"));
-// })
+// Enable CORS for all requests
+app.use(cors());
+
+// Get __dirname equivalent in ES module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve frontend (if deployed together)
+app.use(express.static(path.join(__dirname, "Frontend/dist")));
+app.get("*", (_, res) => {
+    res.sendFile(path.resolve(__dirname, "Frontend", "dist", "index.html"));
+});
+
+// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`🚀 Server is running on port ${PORT}`);
 });
