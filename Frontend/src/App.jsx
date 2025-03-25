@@ -21,7 +21,8 @@ function App() {
   }, [])
 
   async function reviewCode() {
-    const response = await axios.post('http://localhost:3000/ai/get-review', { code })
+    // Replace the localhost URL with your backend URL or load it from the environment variable
+    const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/ai/get-review`, { code })
     setReview(response.data)
   }
 
@@ -51,16 +52,12 @@ function App() {
         </div>
         <div className="right">
           <Markdown
-
             rehypePlugins={[ rehypeHighlight ]}
-
           >{review}</Markdown>
         </div>
       </main>
     </>
   )
 }
-
-
 
 export default App
