@@ -1,7 +1,14 @@
 require('dotenv').config();//i required my gemini key here 
-
+// import { path } from './src/app';
 const app = require('./src/app'); //i required my app from app.js
 
-app.listen(3000,() =>{
-    console.log("server is running on localhost 3000")//i will run on localhost:3000
-})
+// const _dirname = path.resolve();
+
+// app.use(express.static(path.join(_dirname,"/Frontend/dist")));
+// app.get("*",(_, res)=>{
+//     res.sendFile(path.resolve(_dirname,"Frontend","dist","index.html"));
+// })
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
